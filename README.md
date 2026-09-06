@@ -25,9 +25,8 @@ Anything still to fill in is tagged **`[TODO]`** in the HTML. Search the file fo
 
 | What | Where |
 |---|---|
-| GitHub username (`USERNAME`) | hero social links, contact section, `robots.txt`, `sitemap.xml`, `<head>` meta |
-| LinkedIn username | hero social links, contact section |
-| App Store link for Nostalix | the Nostalix project card |
+| App Store link for Nostalix | the Nostalix project card — currently `href="#"` |
+| Share image | `assets/img/og-image.png` (1200×630), then uncomment the `og:image` block in `<head>` |
 | Project screenshots | `assets/img/projects/` — see the note on each card |
 | Service wording | the Services section — rewrite to match what you want to be asked for |
 
@@ -74,27 +73,13 @@ light theme; the two dark blocks below it override those same variables. Change
 
 ## Publishing to GitHub Pages
 
-Run these from this folder. Replace `USERNAME` with your GitHub username.
+This repo is already set up and pushed to
+[`mahmoud-02/mahmoud-02.github.io`](https://github.com/mahmoud-02/mahmoud-02.github.io),
+serving the site at **https://mahmoud-02.github.io**.
 
-```bash
-git init
-git add .
-git commit -m "Initial portfolio site"
-git branch -M main
-```
-
-Then create the repo on GitHub. Name it **`USERNAME.github.io`** — that exact
-name gives you the clean address `https://USERNAME.github.io`. (Any other name
-works too, but the site lives at `https://USERNAME.github.io/repo-name/`.)
-
-```bash
-git remote add origin https://github.com/USERNAME/USERNAME.github.io.git
-git push -u origin main
-```
-
-Finally, on GitHub: **Settings → Pages → Source: Deploy from a branch → `main` / `/ (root)` → Save.**
-
-The site is live about a minute later. Every `git push` after that updates it.
+Pages is configured as **Settings → Pages → Source: Deploy from a branch →
+`main` / `/ (root)`**. Every push to `main` republishes automatically, about a
+minute later.
 
 ### Publishing updates
 
