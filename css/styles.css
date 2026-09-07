@@ -393,8 +393,11 @@ a:hover { text-decoration: underline; }
   box-shadow: 0 0 0 3px color-mix(in srgb, #22c55e 22%, transparent);
 }
 
+/* The floor used to be 2.6rem, which overflowed a 320px screen because the
+   line "and websites." can't shrink below it. A lower floor with a steeper
+   vw slope reaches the same size on desktop without breaking small phones. */
 .hero-title {
-  font-size: clamp(2.6rem, 7.5vw, 4.4rem);
+  font-size: clamp(2.15rem, 8.5vw, 4.4rem);
   font-weight: 800;
   line-height: 1.05;
   letter-spacing: -.04em;
@@ -796,8 +799,11 @@ a:hover { text-decoration: underline; }
    costs nothing to load. The screen is a plain box: drop an <img> inside it
    and the screenshot inherits the rounded corners via overflow:hidden.
    ------------------------------------------------------------------------- */
+/* Starts small: the frame is 9:19.5, so every 100px of width costs 217px of
+   height. At the old 260px each phone stood 563px tall, and four of them made
+   the phone page an endless scroll. Widths step up at the breakpoints below. */
 .device {
-  --device-w: 260px;
+  --device-w: 200px;
   width: var(--device-w);
   max-width: 100%;
   margin-inline: auto;
@@ -1003,6 +1009,7 @@ a:hover { text-decoration: underline; }
 /* ── 7. RESPONSIVE ───────────────────────────────────────────────────────── */
 @media (min-width: 560px) {
   .skill-item { flex-basis: calc(33.3333% - .8334rem); }   /* 3 across */
+  .device { --device-w: 250px; }
 }
 
 @media (min-width: 720px) {
@@ -1023,7 +1030,6 @@ a:hover { text-decoration: underline; }
   .showcase:nth-of-type(even) .showcase-media { grid-column: 1; grid-row: 1; }
 
   .device { --device-w: 280px; }
-  .hero .device { --device-w: 300px; }
 }
 
 @media (min-width: 960px) {
@@ -1060,6 +1066,40 @@ a:hover { text-decoration: underline; }
 
   .fact { grid-template-columns: 5.5rem 1fr; }
   .footer-inner { justify-content: center; text-align: center; }
+}
+
+/* ── PHONE REFINEMENTS ────────────────────────────────────────────────────
+   Below 520px the container is roughly 335px wide, so anything sized for a
+   desktop column has to be re-tuned rather than just left to shrink.
+   ------------------------------------------------------------------------- */
+@media (max-width: 520px) {
+  /* Side-by-side buttons wrapped into an awkward ragged pair. Stacking them
+     full-width also gives a much bigger tap target. */
+  .hero-cta { flex-direction: column; align-items: stretch; }
+  .hero-cta .btn { width: 100%; }
+
+  .hero-lead { font-size: 1rem; }
+  .hero-stack { font-size: .86rem; }
+
+  /* Two skill tiles per row at ~157px each: the 56px icon and full-size labels
+     left names like "App Store Connect" wrapping into three ragged lines. */
+  .skills-grid { gap: 2rem 1rem; }
+  .skill-icon  { width: 44px; height: 44px; }
+  .skill-name  { font-size: .92rem; }
+  .skill-kind  { font-size: .76rem; margin-top: -.25rem; }
+
+  /* Tighten the vertical rhythm so the page isn't all whitespace on a phone. */
+  .section        { padding-block: 3rem; }
+  .showcase       { padding-block: 2rem; gap: 1.75rem; }
+  .showcase-desc  { font-size: 1rem; }
+  .showcase-media { padding-block: 0; }
+
+  .service-card { padding: 1.25rem; }
+  .about-panel  { padding: 1.25rem; }
+  .contact-form { padding: 1.15rem; }
+
+  /* Long addresses were the one thing at real risk of pushing the layout wide. */
+  .contact-line span { overflow-wrap: anywhere; }
 }
 
 /* On the narrowest phones the wordmark crowds the buttons — the monogram carries it. */
