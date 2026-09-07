@@ -256,18 +256,25 @@ a:hover { text-decoration: underline; }
 .section-lead { color: var(--text-muted); font-size: 1.05rem; margin: 0; }
 
 /* ── 4. HEADER & NAV ─────────────────────────────────────────────────────── */
+/* Sitting at the top of the page there is nothing underneath, so the bar can be
+   mostly transparent and let the ambient field through. */
 .site-header {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: color-mix(in srgb, var(--bg) 82%, transparent);
+  background-color: color-mix(in srgb, var(--bg) 72%, transparent);
   backdrop-filter: saturate(180%) blur(12px);
   -webkit-backdrop-filter: saturate(180%) blur(12px);
   border-bottom: 1px solid transparent;
-  transition: border-color .25s var(--ease), box-shadow .25s var(--ease);
+  transition: background-color .25s var(--ease), border-color .25s var(--ease),
+              box-shadow .25s var(--ease);
 }
-/* .is-stuck is added by JS once the page scrolls past the hero's first pixels. */
+
+/* Once content is scrolling underneath, the bar has to actually cover it.
+   At the old 82% the hero copy stayed legible straight through the wordmark,
+   which read as a rendering fault rather than a design. */
 .site-header.is-stuck {
+  background-color: color-mix(in srgb, var(--bg) 95%, transparent);
   border-bottom-color: var(--border);
   box-shadow: var(--shadow-sm);
 }
@@ -289,6 +296,17 @@ a:hover { text-decoration: underline; }
   letter-spacing: -.02em;
 }
 .brand:hover { text-decoration: none; }
+
+/* Photo alternative to the monogram. Identical 34px box and corner radius, so
+   swapping one for the other doesn't shift anything else in the header. */
+.brand-photo {
+  width: 34px;
+  height: 34px;
+  flex: none;
+  border-radius: 10px;
+  object-fit: cover;
+  background: var(--surface-hover);
+}
 
 .brand-mark {
   display: grid;
