@@ -297,8 +297,9 @@ a:hover { text-decoration: underline; }
 }
 .brand:hover { text-decoration: none; }
 
-/* Photo alternative to the monogram. Identical 34px box and corner radius, so
-   swapping one for the other doesn't shift anything else in the header. */
+/* The header avatar. Served at 400px for retina, drawn at 34. object-fit keeps
+   a slightly-off crop filling the box rather than squashing.
+   (This replaced an "MA" monogram; that rule is in git history if ever wanted.) */
 .brand-photo {
   width: 34px;
   height: 34px;
@@ -306,19 +307,6 @@ a:hover { text-decoration: underline; }
   border-radius: 10px;
   object-fit: cover;
   background: var(--surface-hover);
-}
-
-.brand-mark {
-  display: grid;
-  place-items: center;
-  width: 34px; height: 34px;
-  border-radius: 10px;
-  background: var(--accent);
-  color: var(--on-accent);
-  font-family: var(--font-mono);
-  font-size: .8rem;
-  font-weight: 700;
-  letter-spacing: 0;
 }
 
 .nav-list { display: flex; align-items: center; gap: .35rem; }
