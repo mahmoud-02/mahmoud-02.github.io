@@ -74,22 +74,19 @@ light theme; the two dark blocks below it override those same variables. Change
 ## Publishing to GitHub Pages
 
 This repo is
-[`mahmoud-02/my-personal-website`](https://github.com/mahmoud-02/my-personal-website),
-serving the site at **https://mahmoud-02.github.io/my-personal-website/**.
+[`mahmoud-02/mahmoud-02.github.io`](https://github.com/mahmoud-02/mahmoud-02.github.io),
+serving the site at **https://mahmoud-02.github.io/**.
 
 Pages is configured as **Settings → Pages → Source: Deploy from a branch →
 `main` / `/ (root)`**. Every push to `main` republishes automatically, about a
 minute later.
 
-Because this is a project repo rather than a `mahmoud-02.github.io` one, the site
-is served from the `/my-personal-website/` subpath. Every asset path in the HTML
-is relative, so nothing breaks — but the absolute URLs in `<head>`, `sitemap.xml`
-and `robots.txt` include the subpath and must be updated if the repo is ever
-renamed.
+The repo name matters: because it is exactly `<username>.github.io`, the site is
+served from the domain root rather than a `/repo-name/` subpath. Renaming the
+repo would move the site to a subpath, and the absolute URLs in `<head>`,
+`sitemap.xml` and `robots.txt` would all need the subpath adding.
 
-Note that `robots.txt` only works at a domain root, so search engines read
-`mahmoud-02.github.io/robots.txt` (not this repo's copy) and ignore the one here.
-It's kept for the day the site moves to its own domain or the root repo.
+`robots.txt` only works at a domain root, so this one is live and effective.
 
 ### Publishing updates
 

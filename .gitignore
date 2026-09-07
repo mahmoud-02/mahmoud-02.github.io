@@ -12,3 +12,6 @@ Desktop.ini
 # Local notes / drafts you don't want published
 /private/
 *.local.*
+
+# Nested clone of this same repo, kept out of version control.
+mahmoud-02.github.io/
