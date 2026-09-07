@@ -167,11 +167,9 @@
         <div class="device">
           <div class="device-frame">
             <div class="device-screen">
-              <div class="device-placeholder" style="--ph-a:#7c6cff; --ph-b:#2a2266;">
-                <span class="ph-mark">NX</span>
-                <span class="ph-name">Nostalix</span>
-                <span class="ph-rows"><i></i><i></i><i></i></span>
-              </div>
+              <!-- Decorative here: the same shot is shown with a caption in Work
+                   below, so it carries no alt text and stays hidden from readers. -->
+              <img src="assets/img/projects/nostalix.png" alt="" width="402" height="874" decoding="async">
             </div>
           </div>
         </div>
@@ -193,14 +191,18 @@
       </header>
 
       <!--
-        ADDING A SCREENSHOT
-        Each showcase holds a CSS-drawn phone. To put a real screen in one,
-        replace the whole <div class="device-placeholder">…</div> with:
+        ADDING A PROJECT
+        Copy a whole <article class="showcase"> block and change the copy and the
+        image. Left/right alternation is automatic — it comes from nth-of-type in
+        the stylesheet, so inserting one in the middle re-flows the rest.
 
-            <img src="assets/img/projects/nostalix-1.png" alt="">
+        Screenshots live in assets/img/projects/. Export portrait at roughly
+        800px wide (the phone renders about 300px, so that covers retina without
+        bloating the page), and keep filenames lowercase with no spaces —
+        GitHub Pages paths are case-sensitive.
 
-        Export at roughly 1170×2532 (iPhone portrait). Keep filenames lowercase
-        with no spaces — GitHub Pages paths are case-sensitive.
+        The frame is 9:19.5. A shot with a different ratio still works: object-fit
+        crops it to fill, centred. Set width/height to the file's real pixel size.
       -->
 
       <article class="showcase reveal">
@@ -224,15 +226,13 @@
           </div>
           -->
         </div>
-        <div class="showcase-media" aria-hidden="true">
+        <div class="showcase-media">
           <div class="device">
             <div class="device-frame">
               <div class="device-screen">
-                <div class="device-placeholder" style="--ph-a:#7c6cff; --ph-b:#2a2266;">
-                  <span class="ph-mark">NX</span>
-                  <span class="ph-name">Nostalix</span>
-                  <span class="ph-rows"><i></i><i></i><i></i></span>
-                </div>
+                <img src="assets/img/projects/nostalix.png"
+                     alt="Nostalix welcome screen: an open time capsule holding a photo, a letter and a pocket watch, under the title Time Capsule — Seal your moments."
+                     width="402" height="874" loading="lazy" decoding="async">
               </div>
             </div>
           </div>
@@ -259,15 +259,13 @@
             </a>
           </div>
         </div>
-        <div class="showcase-media" aria-hidden="true">
+        <div class="showcase-media">
           <div class="device">
             <div class="device-frame">
               <div class="device-screen">
-                <div class="device-placeholder" style="--ph-a:#3b82f6; --ph-b:#10265c;">
-                  <span class="ph-mark">IN</span>
-                  <span class="ph-name">In Service</span>
-                  <span class="ph-rows"><i></i><i></i><i></i></span>
-                </div>
+                <img src="assets/img/projects/in-service.png"
+                     alt="In Service home screen with a search field asking what service you need, above a grid of categories: Cleaning, Moving, Delivery, Repairs and Plumbing."
+                     width="390" height="902" loading="lazy" decoding="async">
               </div>
             </div>
           </div>
@@ -293,15 +291,15 @@
             </a>
           </div>
         </div>
-        <div class="showcase-media" aria-hidden="true">
+        <div class="showcase-media">
           <div class="device">
             <div class="device-frame">
               <div class="device-screen">
-                <div class="device-placeholder" style="--ph-a:#22b3a0; --ph-b:#0d3b3a;">
-                  <span class="ph-mark">IS</span>
-                  <span class="ph-name">ISATIP</span>
-                  <span class="ph-rows"><i></i><i></i><i></i></span>
-                </div>
+                <!-- Wider than the 9:19.5 frame, so object-fit trims the sides.
+                     Harmless here: the logo sits centred with texture around it. -->
+                <img src="assets/img/projects/isatip.png"
+                     alt="The ISATIP app logo — a magnifying glass drawn from red, amber and teal arcs — on a textured grey background."
+                     width="600" height="1078" loading="lazy" decoding="async">
               </div>
             </div>
           </div>
@@ -327,15 +325,13 @@
             </a>
           </div>
         </div>
-        <div class="showcase-media" aria-hidden="true">
+        <div class="showcase-media">
           <div class="device">
             <div class="device-frame">
               <div class="device-screen">
-                <div class="device-placeholder" style="--ph-a:#ff8a3d; --ph-b:#5c2a10;">
-                  <span class="ph-mark">PT</span>
-                  <span class="ph-name">Petsca</span>
-                  <span class="ph-rows"><i></i><i></i><i></i></span>
-                </div>
+                <img src="assets/img/projects/petsca.png"
+                     alt="Petsca species-selection step: illustrated cards for dog, cat, rabbit, exotic and other, with a progress bar showing step one of four."
+                     width="393" height="852" loading="lazy" decoding="async">
               </div>
             </div>
           </div>
