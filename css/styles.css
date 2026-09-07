@@ -345,13 +345,31 @@ a:hover { text-decoration: underline; }
 }
 .hero-inner { position: relative; z-index: 1; }
 
-/* Copy on the left, device on the right once there's room for both. */
+/* Single column by design: the hero leads with the claim, and the work section
+   right below carries the devices. A phone up here would narrow the positioning
+   to iOS before the reader gets to the rest. */
 .hero-grid {
   display: grid;
   gap: clamp(2.5rem, 6vw, 4rem);
   align-items: center;
 }
-.hero-copy { max-width: 36rem; }
+.hero-copy { max-width: 42rem; }
+
+/* Quiet one-liner naming the stack — breadth, stated up front. */
+.hero-stack {
+  margin: -.5rem 0 1.75rem;
+  font-size: .92rem;
+  color: var(--text-faint);
+}
+.hero-stack-label {
+  display: block;
+  margin-bottom: .25rem;
+  font-family: var(--font-mono);
+  font-size: .7rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
 
 .hero-eyebrow {
   display: inline-flex;
@@ -920,17 +938,14 @@ a:hover { text-decoration: underline; }
   font-weight: 600;
 }
 
-/* The device column gets its own soft halo so it doesn't float unsupported.
-   Shared by the hero device and every showcase device. */
-.showcase-media,
-.hero-media {
+/* The device column gets its own soft halo so it doesn't float unsupported. */
+.showcase-media {
   position: relative;
   display: grid;
   place-items: center;
   padding-block: 1rem;
 }
-.showcase-media::before,
-.hero-media::before {
+.showcase-media::before {
   content: "";
   position: absolute;
   inset: 8% 0;
@@ -938,16 +953,7 @@ a:hover { text-decoration: underline; }
   filter: blur(6px);
   pointer-events: none;
 }
-.showcase-media > *,
-.hero-media > * { position: relative; }
-
-/* The hero phone tilts slightly — it reads as a product shot rather than a
-   diagram. Straightened on hover, and dropped entirely for reduced motion. */
-.hero-media .device {
-  transform: rotate(-3deg);
-  transition: transform .5s var(--ease);
-}
-.hero-media .device:hover { transform: rotate(0deg); }
+.showcase-media > * { position: relative; }
 
 /* ── 6. COMPONENTS ───────────────────────────────────────────────────────── */
 .btn {
@@ -1008,11 +1014,10 @@ a:hover { text-decoration: underline; }
 @media (min-width: 860px) {
   .skill-item { flex-basis: calc(25% - .9375rem); }        /* 4 across */
 
-  /* Hero and showcases become two columns. Showcases alternate: odd ones put
-     the device on the right, even ones on the left, using explicit grid
-     columns so the DOM order (copy first) stays correct for screen readers. */
-  .hero-grid    { grid-template-columns: 1.15fr .85fr; }
-  .showcase     { grid-template-columns: 1fr 1fr; }
+  /* Showcases become two columns and alternate: odd ones put the device on the
+     right, even ones on the left, using explicit grid columns so the DOM order
+     (copy first) stays correct for screen readers. */
+  .showcase { grid-template-columns: 1fr 1fr; }
 
   .showcase:nth-of-type(even) .showcase-copy  { grid-column: 2; grid-row: 1; }
   .showcase:nth-of-type(even) .showcase-media { grid-column: 1; grid-row: 1; }
@@ -1078,7 +1083,6 @@ a:hover { text-decoration: underline; }
   }
   .btn:hover, .contact-line:hover, .service-card:hover,
   .skill-item:hover, .skill-item:hover .skill-icon { transform: none; }
-  .hero-media .device, .hero-media .device:hover { transform: none; }
 }
 
 /* ── PRINT ───────────────────────────────────────────────────────────────── */
