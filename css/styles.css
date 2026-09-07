@@ -343,7 +343,15 @@ a:hover { text-decoration: underline; }
   pointer-events: none;
   z-index: 0;
 }
-.hero-inner { position: relative; z-index: 1; max-width: 44rem; }
+.hero-inner { position: relative; z-index: 1; }
+
+/* Copy on the left, device on the right once there's room for both. */
+.hero-grid {
+  display: grid;
+  gap: clamp(2.5rem, 6vw, 4rem);
+  align-items: center;
+}
+.hero-copy { max-width: 36rem; }
 
 .hero-eyebrow {
   display: inline-flex;
@@ -368,9 +376,10 @@ a:hover { text-decoration: underline; }
 }
 
 .hero-title {
-  font-size: clamp(2.3rem, 7vw, 4rem);
+  font-size: clamp(2.6rem, 7.5vw, 4.4rem);
   font-weight: 800;
-  letter-spacing: -.035em;
+  line-height: 1.05;
+  letter-spacing: -.04em;
   margin-bottom: 1.25rem;
 }
 .accent-text { color: var(--accent-text); }
@@ -569,121 +578,6 @@ a:hover { text-decoration: underline; }
 .section-alt .chips li { background: var(--bg); }
 .chips-sm li { font-size: .76rem; padding: .22rem .55rem; }
 
-/* Projects --------------------------------------------------------------- */
-.filter-bar {
-  display: flex;
-  flex-wrap: wrap;
-  gap: .45rem;
-  margin-bottom: 1.75rem;
-}
-.filter-btn {
-  padding: .45rem .95rem;
-  font: inherit;
-  font-size: .88rem;
-  font-weight: 500;
-  color: var(--text-muted);
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  cursor: pointer;
-  transition: all .18s var(--ease);
-}
-.filter-btn:hover { color: var(--text); border-color: var(--border-strong); }
-.filter-btn.is-active {
-  color: var(--on-accent);
-  background: var(--accent);
-  border-color: var(--accent);
-}
-
-.projects-grid {
-  display: grid;
-  gap: 1.25rem;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-}
-
-.project-card {
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  transition: transform .22s var(--ease), box-shadow .22s var(--ease), border-color .22s var(--ease);
-}
-.project-card:hover {
-  transform: translateY(-4px);
-  border-color: var(--border-strong);
-  box-shadow: var(--shadow-lg);
-}
-/* Hidden by the filter — also removed from the a11y tree and tab order. */
-.project-card[hidden] { display: none; }
-
-/* Generated thumbnail so the grid looks finished before real screenshots exist.
-   Swap the div for <img src="assets/img/projects/name.png" alt="..."> anytime. */
-.project-thumb {
-  position: relative;
-  aspect-ratio: 16 / 9;
-  background:
-    linear-gradient(135deg,
-      color-mix(in srgb, var(--accent) 26%, transparent),
-      color-mix(in srgb, var(--accent) 6%, transparent));
-  border-bottom: 1px solid var(--border);
-}
-.project-thumb::after {
-  content: attr(data-monogram);
-  position: absolute;
-  inset: 0;
-  display: grid;
-  place-content: center;
-  font-family: var(--font-mono);
-  font-size: 2.1rem;
-  font-weight: 700;
-  color: color-mix(in srgb, var(--accent) 65%, transparent);
-}
-.project-card img.project-thumb { object-fit: cover; width: 100%; }
-
-.project-body { padding: 1.25rem 1.25rem .5rem; flex: 1; }
-
-.project-badge {
-  display: inline-block;
-  margin-bottom: .5rem;
-  padding: .18rem .55rem;
-  font-family: var(--font-mono);
-  font-size: .68rem;
-  letter-spacing: .06em;
-  text-transform: uppercase;
-  color: var(--accent-text);
-  background: var(--accent-soft);
-  border-radius: 5px;
-}
-
-.project-title { font-size: 1.15rem; margin-bottom: .5rem; }
-.project-desc { color: var(--text-muted); font-size: .93rem; margin-bottom: 1rem; }
-
-.project-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.1rem;
-  padding: 1rem 1.25rem;
-  border-top: 1px solid var(--border);
-}
-.project-links a {
-  display: inline-flex;
-  align-items: center;
-  gap: .4rem;
-  font-size: .87rem;
-  font-weight: 500;
-  color: var(--text-muted);
-  transition: color .18s var(--ease);
-}
-.project-links a:hover { color: var(--accent-text); text-decoration: none; }
-
-.projects-empty {
-  margin-top: 2rem;
-  text-align: center;
-  color: var(--text-faint);
-}
-
 /* Experience & education timeline ---------------------------------------- */
 .timeline-columns {
   display: grid;
@@ -879,6 +773,182 @@ a:hover { text-decoration: underline; }
 }
 .back-to-top:hover { color: var(--accent-text); text-decoration: none; }
 
+/* ── 5b. DEVICE MOCKUP ────────────────────────────────────────────────────
+   A phone drawn entirely in CSS — no image, so it stays crisp at any size and
+   costs nothing to load. The screen is a plain box: drop an <img> inside it
+   and the screenshot inherits the rounded corners via overflow:hidden.
+   ------------------------------------------------------------------------- */
+.device {
+  --device-w: 260px;
+  width: var(--device-w);
+  max-width: 100%;
+  margin-inline: auto;
+}
+
+.device-frame {
+  position: relative;
+  aspect-ratio: 9 / 19.5;
+  padding: 9px;
+  border-radius: 13% / 6%;
+  background: linear-gradient(160deg, #3a3f4a, #16181d 40%, #23262e);
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, .35),
+    0 24px 48px -12px rgba(0, 0, 0, .45),
+    inset 0 0 0 1px rgba(255, 255, 255, .10);
+}
+
+.device-screen {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 11% / 5.2%;
+  background: var(--surface);
+  display: grid;
+}
+.device-screen img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Dynamic-island pill. Purely decorative, sits above the screen content. */
+.device-frame::after {
+  content: "";
+  position: absolute;
+  top: 2.4%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 31%;
+  height: 2.4%;
+  min-height: 9px;
+  border-radius: 999px;
+  background: #0b0c0f;
+  z-index: 2;
+}
+
+/* Stand-in shown until a real screenshot is dropped in. Deliberately abstract
+   rather than a "missing image" box, so the layout reads as finished. */
+.device-placeholder {
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: .55rem;
+  padding: 1.5rem 1rem;
+  text-align: center;
+  background:
+    radial-gradient(120% 80% at 50% 0%, var(--ph-a, #6366f1) 0%, transparent 60%),
+    linear-gradient(170deg, var(--ph-b, #312e81), #0b1020 75%);
+}
+.device-placeholder .ph-mark {
+  font-family: var(--font-mono);
+  font-size: 2rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, .92);
+  letter-spacing: .02em;
+}
+.device-placeholder .ph-name {
+  font-size: .82rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, .72);
+}
+/* Three stand-in "UI rows" so the screen reads as an interface, not an error. */
+.device-placeholder .ph-rows {
+  display: grid;
+  gap: .4rem;
+  width: 68%;
+  margin-top: .5rem;
+}
+.device-placeholder .ph-rows i {
+  height: 7px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .22);
+}
+.device-placeholder .ph-rows i:nth-child(2) { width: 78%; }
+.device-placeholder .ph-rows i:nth-child(3) { width: 55%; }
+
+/* ── 5c. PROJECT SHOWCASE ─────────────────────────────────────────────────
+   Full-width alternating feature blocks, one per project, in place of the old
+   uniform card grid. Each is copy beside a device.
+   ------------------------------------------------------------------------- */
+.showcase {
+  display: grid;
+  gap: clamp(2rem, 6vw, 4rem);
+  align-items: center;
+  padding-block: clamp(2.5rem, 7vw, 5rem);
+  border-top: 1px solid var(--border);
+}
+.showcase:first-of-type { border-top: 0; padding-top: clamp(1rem, 3vw, 2rem); }
+
+.showcase-copy { max-width: 34rem; }
+
+.showcase-eyebrow {
+  display: inline-block;
+  margin-bottom: .75rem;
+  padding: .22rem .6rem;
+  font-family: var(--font-mono);
+  font-size: .7rem;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: var(--accent-text);
+  background: var(--accent-soft);
+  border-radius: 6px;
+}
+
+.showcase-title {
+  font-size: clamp(1.9rem, 4.5vw, 2.9rem);
+  letter-spacing: -.03em;
+  margin-bottom: .85rem;
+}
+
+.showcase-desc {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  margin-bottom: 1.25rem;
+}
+
+.showcase-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.1rem;
+  margin-top: 1.25rem;
+}
+.showcase-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  font-size: .92rem;
+  font-weight: 600;
+}
+
+/* The device column gets its own soft halo so it doesn't float unsupported.
+   Shared by the hero device and every showcase device. */
+.showcase-media,
+.hero-media {
+  position: relative;
+  display: grid;
+  place-items: center;
+  padding-block: 1rem;
+}
+.showcase-media::before,
+.hero-media::before {
+  content: "";
+  position: absolute;
+  inset: 8% 0;
+  background: radial-gradient(closest-side, var(--glow-c), transparent 72%);
+  filter: blur(6px);
+  pointer-events: none;
+}
+.showcase-media > *,
+.hero-media > * { position: relative; }
+
+/* The hero phone tilts slightly — it reads as a product shot rather than a
+   diagram. Straightened on hover, and dropped entirely for reduced motion. */
+.hero-media .device {
+  transform: rotate(-3deg);
+  transition: transform .5s var(--ease);
+}
+.hero-media .device:hover { transform: rotate(0deg); }
+
 /* ── 6. COMPONENTS ───────────────────────────────────────────────────────── */
 .btn {
   display: inline-flex;
@@ -937,6 +1007,18 @@ a:hover { text-decoration: underline; }
 
 @media (min-width: 860px) {
   .skill-item { flex-basis: calc(25% - .9375rem); }        /* 4 across */
+
+  /* Hero and showcases become two columns. Showcases alternate: odd ones put
+     the device on the right, even ones on the left, using explicit grid
+     columns so the DOM order (copy first) stays correct for screen readers. */
+  .hero-grid    { grid-template-columns: 1.15fr .85fr; }
+  .showcase     { grid-template-columns: 1fr 1fr; }
+
+  .showcase:nth-of-type(even) .showcase-copy  { grid-column: 2; grid-row: 1; }
+  .showcase:nth-of-type(even) .showcase-media { grid-column: 1; grid-row: 1; }
+
+  .device { --device-w: 280px; }
+  .hero .device { --device-w: 300px; }
 }
 
 @media (min-width: 960px) {
@@ -994,8 +1076,9 @@ a:hover { text-decoration: underline; }
     transition-duration: .001ms !important;
     scroll-behavior: auto !important;
   }
-  .btn:hover, .project-card:hover, .contact-line:hover,
+  .btn:hover, .contact-line:hover, .service-card:hover,
   .skill-item:hover, .skill-item:hover .skill-icon { transform: none; }
+  .hero-media .device, .hero-media .device:hover { transform: none; }
 }
 
 /* ── PRINT ───────────────────────────────────────────────────────────────── */

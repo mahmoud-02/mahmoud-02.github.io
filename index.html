@@ -78,10 +78,10 @@
 
     <nav class="nav" id="nav" aria-label="Main navigation">
       <ul class="nav-list">
+        <li><a href="#work">Work</a></li>
         <li><a href="#about">About</a></li>
         <li><a href="#services">Services</a></li>
         <li><a href="#skills">Skills</a></li>
-        <li><a href="#projects">Projects</a></li>
         <li><a href="#experience">Experience</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
@@ -113,24 +113,25 @@
   <!-- ─────────────────────────── HERO ─────────────────────────── -->
   <section class="hero" id="home">
     <div class="container hero-inner">
+     <div class="hero-grid">
+      <div class="hero-copy">
       <p class="hero-eyebrow reveal">
         <span class="status-dot" aria-hidden="true"></span>
         Open to new opportunities
       </p>
 
       <h1 class="hero-title reveal">
-        Hi, I'm <span class="accent-text">Mahmoud</span>.
-        <br>I build apps and websites.
+        I build apps<br>for <span class="accent-text">iOS</span>.
       </h1>
 
       <p class="hero-lead reveal">
-        Junior software developer with a strong pull toward both sides of a product —
-        the Swift that makes it work and the interface that makes it worth using.
-        I've shipped an app to the App Store and designed others from the first Figma frame.
+        I'm Mahmoud — a developer who cares about both halves of a product: the
+        Swift that makes it work and the interface that makes it worth using.
+        One app shipped to the App Store, others designed from the first Figma frame.
       </p>
 
       <div class="hero-cta reveal">
-        <a class="btn btn-primary" href="#projects">
+        <a class="btn btn-primary" href="#work">
           View my work
           <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
@@ -157,6 +158,155 @@
           </a>
         </li>
       </ul>
+      </div><!-- /.hero-copy -->
+
+      <!-- Decorative: the same device component used by the project showcases.
+           [TODO] To show a real screen here, replace the .device-placeholder
+           div with:  <img src="assets/img/projects/nostalix-1.png" alt=""> -->
+      <div class="hero-media reveal" aria-hidden="true">
+        <div class="device">
+          <div class="device-frame">
+            <div class="device-screen">
+              <div class="device-placeholder" style="--ph-a:#7c6cff; --ph-b:#2a2266;">
+                <span class="ph-mark">NX</span>
+                <span class="ph-name">Nostalix</span>
+                <span class="ph-rows"><i></i><i></i><i></i></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+     </div><!-- /.hero-grid -->
+    </div>
+  </section>
+
+  <!-- ─────────────────────────── WORK ─────────────────────────── -->
+  <section class="section" id="work">
+    <div class="container">
+      <header class="section-head reveal">
+        <p class="section-kicker">01 — Work</p>
+        <h2 class="section-title">Selected work</h2>
+        <p class="section-lead">
+          A shipped App Store app, a team product, and an interface design.
+        </p>
+      </header>
+
+      <!--
+        ADDING A SCREENSHOT
+        Each showcase holds a CSS-drawn phone. To put a real screen in one,
+        replace the whole <div class="device-placeholder">…</div> with:
+
+            <img src="assets/img/projects/nostalix-1.png" alt="">
+
+        Export at roughly 1170×2532 (iPhone portrait). Keep filenames lowercase
+        with no spaces — GitHub Pages paths are case-sensitive.
+      -->
+
+      <article class="showcase reveal">
+        <div class="showcase-copy">
+          <p class="showcase-eyebrow">Live on the App Store</p>
+          <h3 class="showcase-title">Nostalix</h3>
+          <p class="showcase-desc">
+            Seal photos, video and writing into a digital time capsule that stays
+            locked until a date you choose. My own project, taken from first sketch
+            all the way through App Store review.
+          </p>
+          <ul class="chips chips-sm">
+            <li>Swift</li><li>UIKit</li><li>Firebase</li>
+          </ul>
+          <!-- [TODO] Paste the App Store URL here and uncomment.
+          <div class="showcase-links">
+            <a href="#" target="_blank" rel="noopener">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 4 19V8a1.5 1.5 0 0 1 1.5-1.5H10"/></svg>
+              View on the App Store
+            </a>
+          </div>
+          -->
+        </div>
+        <div class="showcase-media" aria-hidden="true">
+          <div class="device">
+            <div class="device-frame">
+              <div class="device-screen">
+                <div class="device-placeholder" style="--ph-a:#7c6cff; --ph-b:#2a2266;">
+                  <span class="ph-mark">NX</span>
+                  <span class="ph-name">Nostalix</span>
+                  <span class="ph-rows"><i></i><i></i><i></i></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="showcase reveal">
+        <div class="showcase-copy">
+          <p class="showcase-eyebrow">Team project</p>
+          <h3 class="showcase-title">ISATIPA</h3>
+          <p class="showcase-desc">
+            A company app built with a team, centred on venue management and activity
+            tracking — the kind of tool where getting the data model right matters as
+            much as the screens on top of it.
+          </p>
+          <ul class="chips chips-sm">
+            <li>Swift</li><li>iOS</li><li>Teamwork</li>
+          </ul>
+          <div class="showcase-links">
+            <a href="#contact">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+              Ask me about it
+            </a>
+          </div>
+        </div>
+        <div class="showcase-media" aria-hidden="true">
+          <div class="device">
+            <div class="device-frame">
+              <div class="device-screen">
+                <div class="device-placeholder" style="--ph-a:#22b3a0; --ph-b:#0d3b3a;">
+                  <span class="ph-mark">IS</span>
+                  <span class="ph-name">ISATIPA</span>
+                  <span class="ph-rows"><i></i><i></i><i></i></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="showcase reveal">
+        <div class="showcase-copy">
+          <p class="showcase-eyebrow">Interface design</p>
+          <h3 class="showcase-title">Petsca</h3>
+          <p class="showcase-desc">
+            An app about feeding and caring for pets, designed end to end in Figma.
+            I also set up Google Tag Manager across the app and its site, so the
+            team could see which flows people actually finished.
+          </p>
+          <ul class="chips chips-sm">
+            <li>Figma</li><li>UI Design</li><li>Google Tag Manager</li>
+          </ul>
+          <div class="showcase-links">
+            <a href="#contact">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+              Ask me about it
+            </a>
+          </div>
+        </div>
+        <div class="showcase-media" aria-hidden="true">
+          <div class="device">
+            <div class="device-frame">
+              <div class="device-screen">
+                <div class="device-placeholder" style="--ph-a:#ff8a3d; --ph-b:#5c2a10;">
+                  <span class="ph-mark">PT</span>
+                  <span class="ph-name">Petsca</span>
+                  <span class="ph-rows"><i></i><i></i><i></i></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
     </div>
   </section>
 
@@ -164,7 +314,7 @@
   <section class="section" id="about">
     <div class="container">
       <header class="section-head reveal">
-        <p class="section-kicker">01 — About</p>
+        <p class="section-kicker">02 — About</p>
         <h2 class="section-title">A bit about me</h2>
       </header>
 
@@ -222,7 +372,7 @@
   <section class="section section-alt" id="services">
     <div class="container">
       <header class="section-head reveal">
-        <p class="section-kicker">02 — Services</p>
+        <p class="section-kicker">03 — Services</p>
         <h2 class="section-title">What I can do for you</h2>
         <p class="section-lead">
           Five things I'm set up to take on, from the first sketch to the day it's
@@ -307,7 +457,7 @@
   <section class="section section-skills" id="skills">
     <div class="container">
       <header class="section-head reveal">
-        <p class="section-kicker">03 — Skills</p>
+        <p class="section-kicker">04 — Skills</p>
         <h2 class="section-title">What I work with</h2>
       </header>
 
@@ -437,104 +587,6 @@
         </li>
 
       </ul>
-    </div>
-  </section>
-
-  <!-- ─────────────────────────── PROJECTS ─────────────────────────── -->
-  <section class="section" id="projects">
-    <div class="container">
-      <header class="section-head reveal">
-        <p class="section-kicker">04 — Projects</p>
-        <h2 class="section-title">Selected work</h2>
-        <p class="section-lead">
-          A shipped App Store app, a team product, and an interface design.
-        </p>
-      </header>
-
-      <div class="filter-bar reveal" role="group" aria-label="Filter projects by category">
-        <button class="filter-btn is-active" type="button" data-filter="all">All</button>
-        <button class="filter-btn" type="button" data-filter="ios">iOS</button>
-        <button class="filter-btn" type="button" data-filter="design">Design</button>
-      </div>
-
-      <div class="projects-grid" id="projects-grid">
-
-        <article class="project-card reveal" data-tags="ios">
-          <!-- [TODO] swap for a real screenshot:
-               <img class="project-thumb" src="assets/img/projects/nostalix.png" alt="Nostalix app screens"> -->
-          <div class="project-thumb" data-monogram="NX" aria-hidden="true"></div>
-          <div class="project-body">
-            <p class="project-badge">Published on the App Store</p>
-            <h3 class="project-title">Nostalix</h3>
-            <p class="project-desc">
-              A personal project, live on the App Store. It lets people seal photos, video
-              and writing into digital time capsules that stay locked until a date they
-              choose. Built in UIKit with Firebase behind it.
-            </p>
-            <ul class="chips chips-sm">
-              <li>Swift</li><li>UIKit</li><li>Firebase</li>
-            </ul>
-          </div>
-          <!-- [TODO] Add the App Store link. Paste the real URL in place of the #
-               below and delete these comment markers — the badge above already
-               says it's published, so the button was left out rather than
-               shipping a link that goes nowhere.
-          <footer class="project-links">
-            <a href="#" target="_blank" rel="noopener">
-              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 4 19V8a1.5 1.5 0 0 1 1.5-1.5H10"/></svg>
-              App Store
-            </a>
-          </footer>
-          -->
-        </article>
-
-        <article class="project-card reveal" data-tags="ios">
-          <div class="project-thumb" data-monogram="IS" aria-hidden="true"></div>
-          <div class="project-body">
-            <p class="project-badge">Team project</p>
-            <h3 class="project-title">ISATIPA</h3>
-            <p class="project-desc">
-              A company app built with a team, centred on venue management and activity
-              tracking — the kind of tool where the data model matters as much as the screens.
-            </p>
-            <ul class="chips chips-sm">
-              <li>Swift</li><li>iOS</li><li>Teamwork</li>
-            </ul>
-          </div>
-          <footer class="project-links">
-            <!-- [TODO] add a link if there's something public to point at, or delete this footer -->
-            <a href="#contact">
-              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
-              Ask me about it
-            </a>
-          </footer>
-        </article>
-
-        <article class="project-card reveal" data-tags="design">
-          <div class="project-thumb" data-monogram="PT" aria-hidden="true"></div>
-          <div class="project-body">
-            <p class="project-badge">Design</p>
-            <h3 class="project-title">Petsca — App UI</h3>
-            <p class="project-desc">
-              An interface designed in Figma for an app about feeding and caring for pets.
-              I also set up Google Tag Manager to track events across the app and its site.
-            </p>
-            <ul class="chips chips-sm">
-              <li>Figma</li><li>UI Design</li><li>Google Tag Manager</li>
-            </ul>
-          </div>
-          <footer class="project-links">
-            <!-- [TODO] link the Figma file if you want it public, or delete this footer -->
-            <a href="#contact">
-              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
-              Ask me about it
-            </a>
-          </footer>
-        </article>
-
-      </div>
-
-      <p class="projects-empty" id="projects-empty" hidden>No projects in this category yet.</p>
     </div>
   </section>
 

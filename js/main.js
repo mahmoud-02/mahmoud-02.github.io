@@ -2,8 +2,7 @@
    Portfolio behaviour — vanilla JS, no dependencies.
      1. Theme toggle        4. Scroll reveal
      2. Mobile nav          5. Active nav link
-     3. Sticky header       6. Project filter
-                            7. Contact form
+     3. Sticky header       6. Contact form
    ========================================================================== */
 (function () {
   "use strict";
@@ -157,33 +156,7 @@
     sections.forEach(function (s) { spyObserver.observe(s); });
   }
 
-  /* ── 6. PROJECT FILTER ─────────────────────────────────────────────────── */
-  var filterBtns = document.querySelectorAll(".filter-btn");
-  var projectCards = document.querySelectorAll(".project-card");
-  var emptyNote = document.getElementById("projects-empty");
-
-  if (filterBtns.length && projectCards.length) {
-    filterBtns.forEach(function (btn) {
-      btn.addEventListener("click", function () {
-        var filter = btn.dataset.filter;
-        var shown = 0;
-
-        filterBtns.forEach(function (b) { b.classList.toggle("is-active", b === btn); });
-
-        projectCards.forEach(function (card) {
-          var tags = (card.dataset.tags || "").split(/\s+/);
-          var match = filter === "all" || tags.indexOf(filter) !== -1;
-          /* `hidden` keeps filtered cards out of the tab order and screen readers. */
-          card.hidden = !match;
-          if (match) shown++;
-        });
-
-        if (emptyNote) emptyNote.hidden = shown !== 0;
-      });
-    });
-  }
-
-  /* ── 7. CONTACT FORM ───────────────────────────────────────────────────── */
+  /* ── 6. CONTACT FORM ───────────────────────────────────────────────────── */
   var form = document.getElementById("contact-form");
   var status = document.getElementById("form-status");
 
