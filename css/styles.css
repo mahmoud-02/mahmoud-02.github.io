@@ -15,16 +15,16 @@
    The :not([data-theme="light"]) guard lets the toggle force light on a dark OS.
    ------------------------------------------------------------------------- */
 :root {
-  --bg:            #ffffff;
-  --bg-alt:        #f7f8fa;
+  --bg:            #fbfbfe;
+  --bg-alt:        #f5f3fd;
   --surface:       #ffffff;
-  --surface-hover: #f2f4f7;
-  --border:        #e4e7ec;
-  --border-strong: #d0d5dd;
+  --surface-hover: #f3f1fb;
+  --border:        #e7e4f3;
+  --border-strong: #cfcae1;
 
-  --text:          #14171f;
-  --text-muted:    #596273;
-  --text-faint:    #858e9e;
+  --text:          #14131f;
+  --text-muted:    #565169;
+  --text-faint:    #837e99;
 
   --accent:        #4f46e5;
   --accent-hover:  #4338ca;
@@ -38,11 +38,17 @@
 
   /* Skills-section canvas + the four coloured glows floating on it.
      Light theme keeps them barely-there; the dark blocks turn them up. */
-  --skills-bg: #edf0f7;
+  --skills-bg: #efecfb;
   --glow-a: rgba(255, 138, 46, .16);
   --glow-b: rgba(16, 185, 129, .14);
   --glow-c: rgba(124, 92, 255, .16);
   --glow-d: rgba(234, 179, 8, .14);
+
+  /* Page-wide ambient field painted behind everything by body::before. */
+  --amb-1: rgba(124, 92, 255, .14);
+  --amb-2: rgba(56, 189, 248, .11);
+  --amb-3: rgba(244, 114, 182, .10);
+  --amb-4: rgba(251, 191, 36, .09);
 
   --header-h: 68px;
   --radius:    14px;
@@ -58,64 +64,74 @@
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg:            #0d1117;
-    --bg-alt:        #11161f;
-    --surface:       #161b26;
-    --surface-hover: #1c2331;
-    --border:        #242c3a;
-    --border-strong: #333d4e;
+    --bg:            #08070f;
+    --bg-alt:        #0d0c1a;
+    --surface:       #141326;
+    --surface-hover: #1c1a33;
+    --border:        #272444;
+    --border-strong: #383455;
 
-    --text:          #e9edf5;
-    --text-muted:    #9aa5b8;
-    --text-faint:    #6d788c;
+    --text:          #eae8f6;
+    --text-muted:    #a29dbd;
+    --text-faint:    #746f90;
 
     --accent:        #7c78f0;
     --accent-hover:  #918dff;
     --accent-soft:   #1b1f3a;
     --accent-text:   #a5a1ff;
-    --on-accent:     #0d1117;
+    --on-accent:     #08070f;
 
     --shadow-sm: 0 1px 2px rgba(0, 0, 0, .4);
     --shadow-md: 0 4px 10px -2px rgba(0, 0, 0, .5);
     --shadow-lg: 0 16px 32px -8px rgba(0, 0, 0, .6);
 
-    --skills-bg: #07090d;
+    --skills-bg: #06050d;
     --glow-a: rgba(255, 122, 26, .30);
     --glow-b: rgba(16, 185, 129, .26);
     --glow-c: rgba(124, 92, 255, .30);
     --glow-d: rgba(234, 179, 8, .22);
+
+    --amb-1: rgba(124, 92, 255, .30);
+    --amb-2: rgba(34, 211, 238, .20);
+    --amb-3: rgba(244, 114, 182, .18);
+    --amb-4: rgba(251, 191, 36, .13);
 
     color-scheme: dark;
   }
 }
 
 :root[data-theme="dark"] {
-  --bg:            #0d1117;
-  --bg-alt:        #11161f;
-  --surface:       #161b26;
-  --surface-hover: #1c2331;
-  --border:        #242c3a;
-  --border-strong: #333d4e;
+  --bg:            #08070f;
+  --bg-alt:        #0d0c1a;
+  --surface:       #141326;
+  --surface-hover: #1c1a33;
+  --border:        #272444;
+  --border-strong: #383455;
 
-  --text:          #e9edf5;
-  --text-muted:    #9aa5b8;
-  --text-faint:    #6d788c;
+  --text:          #eae8f6;
+  --text-muted:    #a29dbd;
+  --text-faint:    #746f90;
 
   --accent:        #7c78f0;
   --accent-hover:  #918dff;
   --accent-soft:   #1b1f3a;
   --accent-text:   #a5a1ff;
-  --on-accent:     #0d1117;
+  --on-accent:     #08070f;
 
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, .4);
   --shadow-md: 0 4px 10px -2px rgba(0, 0, 0, .5);
   --shadow-lg: 0 16px 32px -8px rgba(0, 0, 0, .6);
 
-  --skills-bg: #07090d;
+  --skills-bg: #06050d;
   --glow-a: rgba(255, 122, 26, .30);
   --glow-b: rgba(16, 185, 129, .26);
   --glow-c: rgba(124, 92, 255, .30);
   --glow-d: rgba(234, 179, 8, .22);
+
+  --amb-1: rgba(124, 92, 255, .30);
+  --amb-2: rgba(34, 211, 238, .20);
+  --amb-3: rgba(244, 114, 182, .18);
+  --amb-4: rgba(251, 191, 36, .13);
 
   color-scheme: dark;
 }
@@ -123,21 +139,44 @@
 /* ── 2. RESET & BASE ─────────────────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; }
 
+/* The base colour lives on <html>, not <body>. A body background propagates to
+   the canvas, which would leave body::before fighting it for paint order; this
+   way the stack is unambiguous: html colour, then the ambient field, then content. */
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
+  background: var(--bg);
+  transition: background-color .25s var(--ease);
 }
 
 body {
+  position: relative;
   margin: 0;
   font-family: var(--font-sans);
   font-size: 16px;
   line-height: 1.65;
   color: var(--text);
-  background: var(--bg);
+  background: transparent;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
-  transition: background-color .25s var(--ease), color .25s var(--ease);
+  transition: color .25s var(--ease);
+}
+
+/* Ambient colour field behind the whole page — four soft light sources rather
+   than a flat sheet of white or black. It's `fixed`, so it stays put while the
+   content scrolls over it, and the page reads as one lit surface instead of a
+   stack of grey bands. Sections below are translucent so it shows through. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(46rem 34rem at 10% -8%, var(--amb-1), transparent 62%),
+    radial-gradient(40rem 30rem at 94% 4%,  var(--amb-2), transparent 62%),
+    radial-gradient(44rem 34rem at 82% 58%, var(--amb-3), transparent 62%),
+    radial-gradient(40rem 32rem at 2% 92%,  var(--amb-4), transparent 62%);
 }
 
 h1, h2, h3, h4 { line-height: 1.18; margin: 0; font-weight: 700; letter-spacing: -.02em; }
@@ -194,7 +233,9 @@ a:hover { text-decoration: underline; }
   padding-block: clamp(3.5rem, 9vw, 6.5rem);
   scroll-margin-top: var(--header-h);
 }
-.section-alt { background: var(--bg-alt); }
+/* Translucent, not solid — an opaque band would blank out the ambient field
+   underneath and put the flat grey stripes straight back. */
+.section-alt { background: color-mix(in srgb, var(--bg-alt) 62%, transparent); }
 
 .section-head { max-width: 46rem; margin-bottom: clamp(2rem, 5vw, 3rem); }
 
@@ -339,7 +380,9 @@ a:hover { text-decoration: underline; }
   width: min(900px, 130vw);
   aspect-ratio: 1;
   transform: translateX(-50%);
-  background: radial-gradient(circle, color-mix(in srgb, var(--accent) 16%, transparent) 0%, transparent 62%);
+  /* Softened from 16%: the page-wide ambient field now lights this area too,
+     and at the old strength the two stacked into a hot spot behind the H1. */
+  background: radial-gradient(circle, color-mix(in srgb, var(--accent) 10%, transparent) 0%, transparent 62%);
   pointer-events: none;
   z-index: 0;
 }
@@ -510,10 +553,13 @@ a:hover { text-decoration: underline; }
 
 /* Skills ------------------------------------------------------------------
    A logo grid on its own tinted canvas, lit by four soft colour glows.       */
+/* The one section that intensifies the field rather than sitting on it: its
+   own four glows layer on top of the page ambient, so it reads as the brightest
+   moment on the page. Still translucent so the two blend. */
 .section-skills {
   position: relative;
   overflow: hidden;
-  background: var(--skills-bg);
+  background: color-mix(in srgb, var(--skills-bg) 72%, transparent);
   border-block: 1px solid var(--border);
 }
 
@@ -773,7 +819,7 @@ a:hover { text-decoration: underline; }
 .site-footer {
   padding-block: 2rem;
   border-top: 1px solid var(--border);
-  background: var(--bg);
+  background: transparent;
 }
 .footer-inner {
   display: flex;
@@ -849,46 +895,6 @@ a:hover { text-decoration: underline; }
   background: #0b0c0f;
   z-index: 2;
 }
-
-/* Stand-in shown until a real screenshot is dropped in. Deliberately abstract
-   rather than a "missing image" box, so the layout reads as finished. */
-.device-placeholder {
-  display: grid;
-  align-content: center;
-  justify-items: center;
-  gap: .55rem;
-  padding: 1.5rem 1rem;
-  text-align: center;
-  background:
-    radial-gradient(120% 80% at 50% 0%, var(--ph-a, #6366f1) 0%, transparent 60%),
-    linear-gradient(170deg, var(--ph-b, #312e81), #0b1020 75%);
-}
-.device-placeholder .ph-mark {
-  font-family: var(--font-mono);
-  font-size: 2rem;
-  font-weight: 700;
-  color: rgba(255, 255, 255, .92);
-  letter-spacing: .02em;
-}
-.device-placeholder .ph-name {
-  font-size: .82rem;
-  font-weight: 600;
-  color: rgba(255, 255, 255, .72);
-}
-/* Three stand-in "UI rows" so the screen reads as an interface, not an error. */
-.device-placeholder .ph-rows {
-  display: grid;
-  gap: .4rem;
-  width: 68%;
-  margin-top: .5rem;
-}
-.device-placeholder .ph-rows i {
-  height: 7px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, .22);
-}
-.device-placeholder .ph-rows i:nth-child(2) { width: 78%; }
-.device-placeholder .ph-rows i:nth-child(3) { width: 55%; }
 
 /* ── 5c. PROJECT SHOWCASE ─────────────────────────────────────────────────
    Full-width alternating feature blocks, one per project, in place of the old
@@ -1005,6 +1011,17 @@ a:hover { text-decoration: underline; }
   transition: opacity .55s var(--ease), transform .55s var(--ease);
 }
 .reveal-ready .reveal.is-visible { opacity: 1; transform: none; }
+
+/* Card surfaces sit slightly translucent so the ambient field tints them
+   instead of punching opaque holes in it. 88% is high enough that body-text
+   contrast is unaffected — the field behind is soft and low-alpha. */
+.service-card,
+.about-panel,
+.contact-form,
+.contact-line,
+.cert-item {
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+}
 
 /* ── 7. RESPONSIVE ───────────────────────────────────────────────────────── */
 @media (min-width: 560px) {
@@ -1127,8 +1144,10 @@ a:hover { text-decoration: underline; }
 
 /* ── PRINT ───────────────────────────────────────────────────────────────── */
 @media print {
-  .site-header, .hero-cta, .filter-bar, .contact-form, .back-to-top, .skip-link { display: none; }
+  .site-header, .hero-cta, .contact-form, .back-to-top, .skip-link { display: none; }
+  body::before { display: none; }              /* no ambient wash on paper */
   body { background: #fff; color: #000; }
+  .section-alt, .section-skills { background: none; }
   .section { padding-block: 1.5rem; }
   a[href^="http"]::after { content: " (" attr(href) ")"; font-size: .8em; color: #555; }
 }
