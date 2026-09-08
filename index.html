@@ -794,6 +794,13 @@
 </footer>
 
 <script src="js/main.js"></script>
+
+<!-- Cloudflare Web Analytics. Cookieless, so no consent banner is needed.
+     The token is a public site identifier, not a secret — it is meant to sit
+     in client-side HTML. Loaded last, as a module, so it never blocks render.
+     Dashboard: dash.cloudflare.com → Web Analytics -->
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
+        data-cf-beacon='{"token": "327cd733be9340089715e246bc5e6aa8"}'></script>
 </body>
 </html>
 
