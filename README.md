@@ -75,18 +75,28 @@ light theme; the two dark blocks below it override those same variables. Change
 
 This repo is
 [`mahmoud-02/mahmoud-02.github.io`](https://github.com/mahmoud-02/mahmoud-02.github.io),
-serving the site at **https://mahmoud-02.github.io/**.
+serving the site at **https://mahmoud-abia.com/**.
 
 Pages is configured as **Settings → Pages → Source: Deploy from a branch →
 `main` / `/ (root)`**. Every push to `main` republishes automatically, about a
 minute later.
 
-The repo name matters: because it is exactly `<username>.github.io`, the site is
-served from the domain root rather than a `/repo-name/` subpath. Renaming the
-repo would move the site to a subpath, and the absolute URLs in `<head>`,
-`sitemap.xml` and `robots.txt` would all need the subpath adding.
+### The custom domain
 
-`robots.txt` only works at a domain root, so this one is live and effective.
+`mahmoud-abia.com` is registered through Cloudflare. DNS lives there as four
+`A` records on `@` pointing at GitHub's servers
+(`185.199.108-111.153`) plus a `www` `CNAME` to `mahmoud-02.github.io`.
+
+**Every one of those records must stay set to "DNS only" — the grey cloud.**
+If Cloudflare proxies them, GitHub can't complete the domain validation it needs
+to renew the HTTPS certificate, and the site starts serving security warnings.
+
+The `CNAME` file in this repo holds the domain and is what tells GitHub to serve
+it. GitHub writes that file itself when you set the custom domain in Settings,
+so **pull before pushing** after changing it. Deleting the file unsets the domain.
+
+`mahmoud-02.github.io` now redirects here, so older shared links still work.
+`robots.txt` sits at the domain root, so it is live and effective.
 
 ### Publishing updates
 
