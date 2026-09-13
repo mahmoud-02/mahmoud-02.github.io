@@ -1,3 +1,10 @@
+# Dependencies and build output. Both are recreated from package-lock.json and
+# the source: `npm ci` rebuilds node_modules, `npm run build` rebuilds dist.
+# The deploy workflow does exactly that, so neither belongs in the repo.
+node_modules/
+dist/
+*.tsbuildinfo
+
 # OS cruft
 Thumbs.db
 ehthumbs.db

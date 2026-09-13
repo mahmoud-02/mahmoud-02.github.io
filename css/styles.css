@@ -179,6 +179,28 @@ body::before {
     radial-gradient(40rem 32rem at 2% 92%,  var(--amb-4), transparent 62%);
 }
 
+/* The WebGL particle scene (src/scene). Fixed to the viewport behind all
+   content. It shares z-index -1 with the ambient field above, but comes later
+   in document order, so it paints over that glow and under everything else.
+   Sized to the *large* viewport so phone address bars sliding in and out
+   don't resize it mid-scroll. */
+#bg-scene {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  height: 100lvh;
+  z-index: -1;
+  display: block;
+  pointer-events: none;
+  /* Hidden until the lazily-loaded engine has drawn, then faded in, so the
+     scene never pops in abruptly over content that's already on screen. */
+  opacity: 0;
+  transition: opacity 1.2s var(--ease);
+}
+#bg-scene.is-ready { opacity: 1; }
+
 h1, h2, h3, h4 { line-height: 1.18; margin: 0; font-weight: 700; letter-spacing: -.02em; }
 p  { margin: 0 0 1rem; }
 ul, ol { margin: 0; padding: 0; list-style: none; }
@@ -973,6 +995,212 @@ a:hover { text-decoration: underline; }
 }
 .showcase-media > * { position: relative; }
 
+/* ── 5d. CASE STUDIES ─────────────────────────────────────────────────────
+   Full-screen on phones, a two-column panel on desktop. The <dialog> itself is
+   the full-viewport backdrop and the panel sits inside it, rather than leaning
+   on ::backdrop — that keeps "click outside to close" a plain target check and
+   behaves predictably inside view transitions.
+   ------------------------------------------------------------------------- */
+
+/* Always reserve the scrollbar's space, so locking scroll while a case study is
+   open doesn't make the whole page jump sideways by the scrollbar's width. */
+html { scrollbar-gutter: stable; }
+html.case-is-open { overflow: hidden; }
+
+/* The screenshot on each Work card opens its case study. */
+.showcase-media[data-case] { cursor: zoom-in; }
+.showcase-media[data-case] .device { transition: transform .35s var(--ease); }
+.showcase-media[data-case]:hover .device { transform: translateY(-6px) scale(1.02); }
+
+.case {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  color: var(--text);
+  background: color-mix(in srgb, var(--bg) 60%, transparent);
+  overflow: hidden;
+  overscroll-behavior: contain;
+}
+.case:not([open]) { display: none; }
+.case[open] { display: grid; place-items: center; }
+.case::backdrop { background: transparent; }
+
+.case-panel {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: var(--surface);
+}
+
+/* Stays reachable while the panel scrolls on a phone. */
+.case-close {
+  position: fixed;
+  top: .75rem;
+  right: .75rem;
+  z-index: 3;
+  color: var(--text);
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  border-color: var(--border);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.case-media {
+  display: grid;
+  align-content: center;
+  gap: 1.1rem;
+  padding: 3.75rem 1rem 1.5rem;
+  background:
+    radial-gradient(circle at 50% 42%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 68%),
+    var(--bg-alt);
+}
+
+/* Native horizontal scroll with snap: swiping just works on a phone, with no
+   gesture library. */
+.case-track {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  outline-offset: -3px;
+  border-radius: var(--radius);
+}
+.case-track::-webkit-scrollbar { display: none; }
+
+.case-slide {
+  flex: 0 0 100%;
+  margin: 0;
+  padding-block: .5rem;
+  display: grid;
+  place-items: center;
+  scroll-snap-align: center;
+}
+.case-slide .device { --device-w: 200px; }
+
+.case-nav { display: flex; align-items: center; justify-content: center; gap: .5rem; }
+.case-nav[hidden] { display: none; }
+.case-arrow:disabled { opacity: .35; cursor: default; }
+.case-arrow:disabled:hover { background: transparent; border-color: transparent; }
+.case-dots { display: flex; align-items: center; }
+
+/* 24px tap target around an 8px visible dot. */
+.case-dot {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+.case-dot::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--border-strong);
+  transition: width .25s var(--ease), background-color .25s var(--ease);
+}
+.case-dot[aria-current="true"]::before { width: 20px; background: var(--accent); }
+
+.case-body { padding: 1.75rem 1.25rem 2.5rem; }
+
+.case-title {
+  font-size: clamp(2rem, 5vw, 2.75rem);
+  letter-spacing: -.03em;
+  margin-bottom: .75rem;
+}
+.case-summary { font-size: 1.08rem; color: var(--text-muted); }
+
+.case-meta {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem 1.25rem;
+  margin: 1.75rem 0;
+  padding: 1.25rem 0;
+  border-block: 1px solid var(--border);
+}
+.case-meta dt {
+  font-family: var(--font-mono);
+  font-size: .68rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+.case-meta dd { margin: .2rem 0 0; font-size: .95rem; font-weight: 500; }
+
+.case-h { font-size: 1.05rem; margin: 1.6rem 0 .45rem; }
+.case-body p { color: var(--text-muted); }
+
+.case-actions { margin-top: 2rem; }
+
+.case-pager {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 2.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border);
+}
+.case-pager:empty { display: none; }
+.case-pager-btn {
+  padding: .5rem 0;
+  font: inherit;
+  font-weight: 500;
+  color: var(--text-muted);
+  background: none;
+  border: 0;
+  cursor: pointer;
+  transition: color .18s var(--ease);
+}
+.case-pager-btn:hover { color: var(--accent-text); }
+.case-pager-btn.is-next { margin-left: auto; text-align: right; }
+
+@media (min-width: 900px) {
+  .case[open] { padding: 2rem; }
+  .case { backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+
+  .case-panel {
+    width: min(1040px, 100%);
+    height: min(820px, calc(100vh - 4rem));
+    display: grid;
+    grid-template-columns: minmax(320px, .9fr) 1.1fr;
+    overflow: hidden;              /* each column scrolls on its own */
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    box-shadow: var(--shadow-lg);
+  }
+  .case-close { position: absolute; top: 1rem; right: 1rem; }
+  .case-media { padding: 2.5rem 1.5rem; }
+  .case-slide .device { --device-w: 270px; }
+  .case-body { padding: 3rem 2.75rem; overflow-y: auto; overscroll-behavior: contain; }
+}
+
+/* The card-to-dialog morph. Only the phone is named; everything else in the
+   page cross-fades as the default root transition. */
+::view-transition-group(case-device) {
+  animation-duration: .55s;
+  animation-timing-function: cubic-bezier(.22, .61, .36, 1);
+}
+::view-transition-old(root),
+::view-transition-new(root) { animation-duration: .32s; }
+
+/* Browsers without view transitions still get an entrance, just a simpler one. */
+@keyframes case-in {
+  from { opacity: 0; transform: translateY(18px) scale(.98); }
+  to   { opacity: 1; transform: none; }
+}
+:root:not(.has-vt) .case[open] .case-panel { animation: case-in .38s var(--ease); }
+
 /* ── 6. COMPONENTS ───────────────────────────────────────────────────────── */
 .btn {
   display: inline-flex;
@@ -1145,13 +1373,15 @@ a:hover { text-decoration: underline; }
     scroll-behavior: auto !important;
   }
   .btn:hover, .contact-line:hover, .service-card:hover,
-  .skill-item:hover, .skill-item:hover .skill-icon { transform: none; }
+  .skill-item:hover, .skill-item:hover .skill-icon,
+  .showcase-media[data-case]:hover .device { transform: none; }
 }
 
 /* ── PRINT ───────────────────────────────────────────────────────────────── */
 @media print {
   .site-header, .hero-cta, .contact-form, .back-to-top, .skip-link { display: none; }
   body::before { display: none; }              /* no ambient wash on paper */
+  #bg-scene, .case { display: none !important; }
   body { background: #fff; color: #000; }
   .section-alt, .section-skills { background: none; }
   .section { padding-block: 1.5rem; }

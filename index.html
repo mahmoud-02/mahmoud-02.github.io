@@ -65,6 +65,11 @@
 
 <body>
 
+<!-- Background particle scene: one WebGL canvas fixed behind every section,
+     morphing shape as you scroll. Decorative, so hidden from assistive tech.
+     Driven by src/scene/; if WebGL is unavailable the canvas removes itself. -->
+<canvas id="bg-scene" aria-hidden="true"></canvas>
+
 <a class="skip-link" href="#main">Skip to content</a>
 
 <!-- ─────────────────────────── HEADER ─────────────────────────── -->
@@ -212,16 +217,20 @@
           <ul class="chips chips-sm">
             <li>Swift</li><li>UIKit</li><li>Firebase</li>
           </ul>
-          <!-- [TODO] Paste the App Store URL here and uncomment.
           <div class="showcase-links">
+            <button type="button" class="btn btn-ghost case-open" data-case="nostalix" aria-haspopup="dialog">
+              View case study
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </button>
+            <!-- [TODO] Paste the App Store URL here and uncomment.
             <a href="#" target="_blank" rel="noopener">
               <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 4 19V8a1.5 1.5 0 0 1 1.5-1.5H10"/></svg>
               View on the App Store
             </a>
+            -->
           </div>
-          -->
         </div>
-        <div class="showcase-media">
+        <div class="showcase-media" data-case="nostalix">
           <div class="device">
             <div class="device-frame">
               <div class="device-screen">
@@ -248,13 +257,13 @@
             <li>Flutter</li><li>Firebase</li><li>Cross-platform</li>
           </ul>
           <div class="showcase-links">
-            <a href="#contact">
-              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
-              Ask me about it
-            </a>
+            <button type="button" class="btn btn-ghost case-open" data-case="in-service" aria-haspopup="dialog">
+              View case study
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </button>
           </div>
         </div>
-        <div class="showcase-media">
+        <div class="showcase-media" data-case="in-service">
           <div class="device">
             <div class="device-frame">
               <div class="device-screen">
@@ -280,13 +289,13 @@
             <li>Swift</li><li>iOS</li><li>Teamwork</li>
           </ul>
           <div class="showcase-links">
-            <a href="#contact">
-              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
-              Ask me about it
-            </a>
+            <button type="button" class="btn btn-ghost case-open" data-case="isatip" aria-haspopup="dialog">
+              View case study
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </button>
           </div>
         </div>
-        <div class="showcase-media">
+        <div class="showcase-media" data-case="isatip">
           <div class="device">
             <div class="device-frame">
               <div class="device-screen">
@@ -314,13 +323,13 @@
             <li>Figma</li><li>UI Design</li><li>Google Tag Manager</li>
           </ul>
           <div class="showcase-links">
-            <a href="#contact">
-              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
-              Ask me about it
-            </a>
+            <button type="button" class="btn btn-ghost case-open" data-case="petsca" aria-haspopup="dialog">
+              View case study
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </button>
           </div>
         </div>
-        <div class="showcase-media">
+        <div class="showcase-media" data-case="petsca">
           <div class="device">
             <div class="device-frame">
               <div class="device-screen">
@@ -780,6 +789,274 @@
 
 </main>
 
+<!-- ─────────────────────────── CASE STUDIES ───────────────────────────
+     One <dialog> per project, opened by the matching data-case="…" trigger in
+     Work. The content lives here in the HTML, so search engines read it even
+     though it's hidden until opened. Driven by src/effects/case-studies.ts.
+
+     ADDING A SCREENSHOT to a gallery: copy a <figure class="case-slide"> inside
+     that project's .case-track. Arrows and dots appear automatically once there
+     is more than one. Keep filenames lowercase with no spaces.
+
+     ADDING A PROJECT: copy a whole <dialog>, give it id="case-<slug>", and use
+     the same slug in the Work card's data-case attributes. Prev/next links
+     between projects are generated, so there's nothing else to update.
+
+     Each case study can be linked directly: mahmoud-abia.com/#project/<slug>
+     ─────────────────────────────────────────────────────────────────────── -->
+
+<dialog class="case" id="case-nostalix" aria-labelledby="case-nostalix-title">
+  <div class="case-panel">
+    <button type="button" class="icon-btn case-close" aria-label="Close case study">
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+    </button>
+
+    <div class="case-media">
+      <div class="case-track" tabindex="0" role="region" aria-roledescription="carousel" aria-label="Nostalix screenshots">
+        <figure class="case-slide">
+          <div class="device">
+            <div class="device-frame"><div class="device-screen">
+              <img src="assets/img/projects/nostalix.png"
+                   alt="Nostalix welcome screen: an open time capsule holding a photo, a letter and a pocket watch, under the title Time Capsule — Seal your moments."
+                   width="402" height="874" loading="lazy" decoding="async">
+            </div></div>
+          </div>
+        </figure>
+        <!-- [TODO] More Nostalix screenshots: copy the <figure> above. -->
+      </div>
+      <div class="case-nav" hidden></div>
+    </div>
+
+    <div class="case-body">
+      <p class="showcase-eyebrow">Live on the App Store</p>
+      <h2 class="case-title" id="case-nostalix-title">Nostalix</h2>
+      <p class="case-summary">
+        A digital time-capsule app. Seal photos, video and writing inside a capsule,
+        choose a date, and it stays locked until that day comes.
+      </p>
+
+      <dl class="case-meta">
+        <div><dt>Role</dt><dd>Solo, personal project</dd></div>
+        <div><dt>Platform</dt><dd>iOS</dd></div>
+        <div><dt>Built with</dt><dd>Swift · UIKit · Firebase</dd></div>
+        <div><dt>Status</dt><dd>Published on the App Store</dd></div>
+      </dl>
+
+      <h3 class="case-h">What it does</h3>
+      <p>
+        Each capsule holds multimedia and written content — photos, videos and text —
+        that can't be opened before the date set when it was created. The whole point
+        is that nothing comes back early: it arrives on the day you chose.
+      </p>
+
+      <h3 class="case-h">How it's built</h3>
+      <p>
+        The interface is built in UIKit, with Firebase integrated behind it. I took it
+        all the way through App Store review to release, which is where a project stops
+        being a prototype and has to hold up for real users.
+      </p>
+
+      <!-- [TODO] Worth adding: a hard problem you solved (how the lock is enforced,
+           handling media uploads) and anything you'd do differently next time. -->
+
+      <div class="case-actions">
+        <a class="btn btn-primary" href="#contact" data-case-contact>
+          Talk to me about this project
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+      <nav class="case-pager" aria-label="Other projects"></nav>
+    </div>
+  </div>
+</dialog>
+
+<dialog class="case" id="case-in-service" aria-labelledby="case-in-service-title">
+  <div class="case-panel">
+    <button type="button" class="icon-btn case-close" aria-label="Close case study">
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+    </button>
+
+    <div class="case-media">
+      <div class="case-track" tabindex="0" role="region" aria-roledescription="carousel" aria-label="In Service screenshots">
+        <figure class="case-slide">
+          <div class="device">
+            <div class="device-frame"><div class="device-screen">
+              <img src="assets/img/projects/in-service.png"
+                   alt="In Service home screen with a search field asking what service you need, above a grid of categories: Cleaning, Moving, Delivery, Repairs and Plumbing."
+                   width="390" height="902" loading="lazy" decoding="async">
+            </div></div>
+          </div>
+        </figure>
+        <!-- [TODO] More In Service screenshots: copy the <figure> above. -->
+      </div>
+      <div class="case-nav" hidden></div>
+    </div>
+
+    <div class="case-body">
+      <p class="showcase-eyebrow">Cross-platform app</p>
+      <h2 class="case-title" id="case-in-service-title">In Service</h2>
+      <p class="case-summary">
+        A mobile app for requesting, managing and tracking services in one place — built
+        to make the whole process faster and more organised for customers and service
+        providers alike.
+      </p>
+
+      <dl class="case-meta">
+        <div><dt>Role</dt><dd>Development</dd></div>
+        <div><dt>Platform</dt><dd>iOS &amp; Android</dd></div>
+        <div><dt>Built with</dt><dd>Flutter · Firebase</dd></div>
+      </dl>
+
+      <h3 class="case-h">What it does</h3>
+      <p>
+        People browse the services on offer — grouped into categories such as cleaning,
+        moving, delivery, repairs and plumbing — submit a request, then follow its status
+        and get updates as it moves along. It's designed around both sides of the
+        exchange: the customer asking for the work and the provider carrying it out.
+      </p>
+
+      <h3 class="case-h">How it's built</h3>
+      <p>
+        Written in Flutter, so a single codebase ships to both iOS and Android instead of
+        maintaining two separate apps, with Firebase handling the data behind it.
+      </p>
+
+      <!-- [TODO] Worth adding: how request status updates reach the user, and any
+           challenge you hit keeping iOS and Android behaving the same. -->
+
+      <div class="case-actions">
+        <a class="btn btn-primary" href="#contact" data-case-contact>
+          Talk to me about this project
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+      <nav class="case-pager" aria-label="Other projects"></nav>
+    </div>
+  </div>
+</dialog>
+
+<dialog class="case" id="case-isatip" aria-labelledby="case-isatip-title">
+  <div class="case-panel">
+    <button type="button" class="icon-btn case-close" aria-label="Close case study">
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+    </button>
+
+    <div class="case-media">
+      <div class="case-track" tabindex="0" role="region" aria-roledescription="carousel" aria-label="ISATIP screenshots">
+        <figure class="case-slide">
+          <div class="device">
+            <div class="device-frame"><div class="device-screen">
+              <img src="assets/img/projects/isatip.png"
+                   alt="The ISATIP app logo — a magnifying glass drawn from red, amber and teal arcs — on a textured grey background."
+                   width="600" height="1078" loading="lazy" decoding="async">
+            </div></div>
+          </div>
+        </figure>
+        <!-- [TODO] ISATIP screens: this is the logo splash. A real app screen here
+             would show far more of what the app does. -->
+      </div>
+      <div class="case-nav" hidden></div>
+    </div>
+
+    <div class="case-body">
+      <p class="showcase-eyebrow">Team project</p>
+      <h2 class="case-title" id="case-isatip-title">ISATIP</h2>
+      <p class="case-summary">
+        A company app built as part of a team, centred on managing venues and keeping
+        track of the activity around them.
+      </p>
+
+      <dl class="case-meta">
+        <div><dt>Role</dt><dd>Developer, working in a team</dd></div>
+        <div><dt>Platform</dt><dd>iOS</dd></div>
+        <div><dt>Built with</dt><dd>Swift</dd></div>
+      </dl>
+
+      <h3 class="case-h">What it does</h3>
+      <p>
+        ISATIP is built for managing venues and tracking activities — the kind of tool
+        where getting the underlying data model right matters as much as the screens
+        built on top of it.
+      </p>
+
+      <!-- [TODO] Worth adding: which part of the app you owned, how the team split the
+           work, and what working in a shared codebase taught you. -->
+
+      <div class="case-actions">
+        <a class="btn btn-primary" href="#contact" data-case-contact>
+          Talk to me about this project
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+      <nav class="case-pager" aria-label="Other projects"></nav>
+    </div>
+  </div>
+</dialog>
+
+<dialog class="case" id="case-petsca" aria-labelledby="case-petsca-title">
+  <div class="case-panel">
+    <button type="button" class="icon-btn case-close" aria-label="Close case study">
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+    </button>
+
+    <div class="case-media">
+      <div class="case-track" tabindex="0" role="region" aria-roledescription="carousel" aria-label="Petsca screenshots">
+        <figure class="case-slide">
+          <div class="device">
+            <div class="device-frame"><div class="device-screen">
+              <img src="assets/img/projects/petsca.png"
+                   alt="Petsca species-selection step: illustrated cards for dog, cat, rabbit, exotic and other, with a progress bar showing step one of four."
+                   width="393" height="852" loading="lazy" decoding="async">
+            </div></div>
+          </div>
+        </figure>
+        <!-- [TODO] More Petsca screens: copy the <figure> above. -->
+      </div>
+      <div class="case-nav" hidden></div>
+    </div>
+
+    <div class="case-body">
+      <p class="showcase-eyebrow">Interface design</p>
+      <h2 class="case-title" id="case-petsca-title">Petsca</h2>
+      <p class="case-summary">
+        An app about feeding and caring for pets, designed end to end in Figma, with
+        analytics set up across both the app and its website.
+      </p>
+
+      <dl class="case-meta">
+        <div><dt>Role</dt><dd>Interface design &amp; analytics</dd></div>
+        <div><dt>Platform</dt><dd>Mobile app &amp; website</dd></div>
+        <div><dt>Built with</dt><dd>Figma · Google Tag Manager</dd></div>
+      </dl>
+
+      <h3 class="case-h">What it does</h3>
+      <p>
+        The app guides people through a step-by-step flow that starts by asking which
+        kind of pet they have — dog, cat, rabbit, something exotic or other — before
+        building up the details it needs.
+      </p>
+
+      <h3 class="case-h">How it's built</h3>
+      <p>
+        Every screen and flow was designed in Figma. I also integrated Google Tag Manager
+        across the app and its website, so events could be tracked and the data analysed
+        to see how people actually move through it.
+      </p>
+
+      <!-- [TODO] Worth adding: why the flow is split into four steps, and which
+           events you chose to track and what they revealed. -->
+
+      <div class="case-actions">
+        <a class="btn btn-primary" href="#contact" data-case-contact>
+          Talk to me about this project
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+      <nav class="case-pager" aria-label="Other projects"></nav>
+    </div>
+  </div>
+</dialog>
+
 <!-- ─────────────────────────── FOOTER ─────────────────────────── -->
 <footer class="site-footer">
   <div class="container footer-inner">
@@ -793,7 +1070,11 @@
   </div>
 </footer>
 
-<script src="js/main.js"></script>
+<!-- Both are modules so Vite bundles them. A classic <script src> is left out
+     of the build entirely, which would silently drop the theme toggle and menu. -->
+<script type="module" src="/src/site.js"></script>
+<script type="module" src="/src/effects/main.ts"></script>
+<script type="module" src="/src/scene/main.ts"></script>
 
 <!-- Cloudflare Web Analytics. Cookieless, so no consent banner is needed.
      The token is a public site identifier, not a secret — it is meant to sit
